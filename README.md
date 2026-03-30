@@ -32,9 +32,10 @@ This project is separated into backend logic and frontend UI:
   ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+```
 
-3. Install the required dependencies:
-  ```bash
+3. **Install the required dependencies:**
+   ```bash
 pip install pypdf streamlit
 
 4. **Run the application:**
