@@ -27,6 +27,7 @@ This project is separated into backend logic and frontend UI:
    ```bash
    git clone [https://github.com/vfi27/pdf-editor.git](https://github.com/vfi27/pdf-editor.git)
    cd pdf-toolkit
+   ```
 
 2. **Create a virtual environment (recommended):**
   ```bash
@@ -35,9 +36,11 @@ source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 ```
 
 3. **Install the required dependencies:**
-   ```bash
+ ```bash
 pip install pypdf streamlit
+ ```
 
 4. **Run the application:**
-  ```bash
+```bash
 streamlit run app.py
+```
