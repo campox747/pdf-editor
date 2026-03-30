@@ -1,6 +1,6 @@
 import argparse
 from pypdf import PdfWriter
-from merge import merge_files
+from core.merge import merge_files
 
 
 # 1. Initialize the parser
