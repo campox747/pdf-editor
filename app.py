@@ -1,33 +1,69 @@
-import argparse
-import core
-from pypdf import PdfWriter
+import questionary
+from rich import print
+from rich.panel import Panel
+from rich.console import Console
 from core.merge import merge_files
+from rich.align import Align
 
+# Initialize Console
+console = Console()
 
 def main():
-    # 1. Initialize the parser
-    parser = argparse.ArgumentParser(description="Merge multiple PDFs into one.")
 
-    # 2. Define the arguments you expect
-    parser.add_argument('mode', choices=['merge', 'reorder'], help="Name the operation you want to perform")
+    # Print title
 
-    parser.add_argument('inputs', nargs='+', help="The PDF files you want to merge")
+    title_panel = Panel(
+    "[bold cyan]Welcome to PDF Toolkit![/bold cyan]",
+    border_style="cyan",
+    padding=(1, 5),  # Adds 1 line of vertical padding, 5 spaces of horizontal padding
+    expand=False
+    )
 
-    # -o or --output is an optional flag, defaulting to 'pdf-toolkit.pdf' if not provided
-    parser.add_argument('-o', '--output', default='pdf-toolkit.pdf', help="Name of the output file")
+    console.print("\n")
+    console.print(Align.center(title_panel))
+    console.print("\n")
 
-    # 3. Parse what the user actually typed in the terminal
-    args = parser.parse_args()
+    # Print Info Note
+    
+    note_panel = Panel(
+    "Use [bold white]Ctrl + C[/bold white] (on Windows & macOS) to go back a stage.",
+    title="[bold yellow]💡 Note[/bold yellow]",
+    border_style="yellow",
+    style="yellow",
+    expand=False
+    )
+    console.print(note_panel)
+    console.print("\n")
 
-    if args.mode == 'merge':
-        print(f"Merging these files: {args.inputs}")
-        print(f"Saving as: {args.output}")
+    # Ask user about the type of operation
+
+    operation = questionary.select(
+        "What would you like to do?",
+        choices=["Merge PDFs",
+                 "Reorder PDF",
+                 "Help",
+                 "Exit"
+        ]).ask()
+    
+    if (operation == "Exit"):
+
+        # Exit program
+        console.print("See you later!")
+        return
+
+    elif (operation == "Merge PDFs"):
+    
+        # TO DO: Open pop up to make user upload PDFs with drag-and-drop
+        # Inside pop-up, make user upload files and make sure there are at least two. When done, go ahead.
+
+
+        console.print(f"\n[yellow]Merging {len(input)} files...[/yellow]")
+
 
         try:
-            merge_files(args.inputs, args.output) 
-            print("Merge successful!")
+            merge_files(input, output)
+            console.print("[bold green]Merged successfully![/bold green]\n")
         except FileNotFoundError:
-            print("Error: One of the files you typed does not exist in this folder.")
+            console.print("[bold red]Error: One of the files you typed does not exist.[/bold red]\n")
         except Exception as e:
-            # This catches any other weird errors and tells you exactly what they are
-            print(f"An unexpected error occurred: {e}")
+            console.print(f"[bold red]An unexpected error occurred: {e}[/bold red]\n")
