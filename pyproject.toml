@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdf-toolkit"
+version = "0.1.0"
+description = "A terminal utility to merge and reorder PDFs"
+dependencies = [
+    "pypdf"
+]
+
+[project.scripts]
+pdf-toolkit = "app:main"
+
+[tool.setuptools]
+py-modules = ["app"]
+
+packages = ["core"]
