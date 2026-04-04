@@ -1,4 +1,4 @@
-# PDF Toolkit: Merge & Reorder Utility 📄🛠️
+# PDF Toolkit: Merge & Reorder Utility
 
 pdf-editor allows you to merge PDFs and reorder the pages as you wish.
 
