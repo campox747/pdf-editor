@@ -1,4 +1,4 @@
-# PDF Toolkit: Merge & Reorder Utility 📄🛠️
+# PDF Toolkit: Merge & Reorder Utility
 
 pdf-editor allows you to merge PDFs and reorder the pages as you wish.
 
@@ -27,16 +27,20 @@ This project is separated into backend logic and frontend UI:
    ```bash
    git clone [https://github.com/vfi27/pdf-editor.git](https://github.com/vfi27/pdf-editor.git)
    cd pdf-toolkit
+   ```
 
 2. **Create a virtual environment (recommended):**
   ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+```
 
-3. Install the required dependencies:
-  ```bash
+3. **Install the required dependencies:**
+ ```bash
 pip install pypdf streamlit
+ ```
 
 4. **Run the application:**
-  ```bash
+```bash
 streamlit run app.py
+```
