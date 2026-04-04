@@ -7,7 +7,9 @@ name = "pdf-toolkit"
 version = "0.1.0"
 description = "A terminal utility to merge and reorder PDFs"
 dependencies = [
-    "pypdf"
+    "pypdf",
+    "questionary",
+    "rich"
 ]
 
 [project.scripts]
