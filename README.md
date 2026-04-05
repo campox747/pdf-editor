@@ -40,5 +40,6 @@ pip install -e .
  ```
 
 4. **Run the application (from any terminal):**
-```bash pdf-toolkit
+```bash 
+pdf-toolkits
 ```
