@@ -9,7 +9,9 @@ description = "A terminal utility to merge and reorder PDFs"
 dependencies = [
     "pypdf",
     "questionary",
-    "rich"
+    "rich",
+    "PyQt6",
+    "PyMuPDF"
 ]
 
 [project.scripts]

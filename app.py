@@ -1,9 +1,12 @@
 import questionary
+import sys
 from rich import print
 from rich.panel import Panel
 from rich.console import Console
 from core.merge import merge_files
 from rich.align import Align
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton
+from core.gui_merge import MainWindow
 
 # Initialize Console
 console = Console()
@@ -55,6 +58,13 @@ def main():
     
         # TO DO: Open pop up to make user upload PDFs with drag-and-drop
         # Inside pop-up, make user upload files and make sure there are at least two. When done, go ahead.
+
+        app = QApplication(sys.argv)
+
+        window = MainWindow()
+        window.show()
+
+        app.exec()
 
 
         console.print(f"\n[yellow]Merging {len(input)} files...[/yellow]")
