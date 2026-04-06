@@ -27,9 +27,8 @@ def main():
     console.print("\n")
 
     # Print Info Note
-    
     note_panel = Panel(
-    "Use [bold white]Ctrl + C[/bold white] (on Windows & macOS) to go back a stage.",
+    "Use [bold white]Ctrl + C[/bold white] (on Windows & macOS) to abort.",
     title="[bold yellow]💡 Note[/bold yellow]",
     border_style="yellow",
     style="yellow",
@@ -38,8 +37,7 @@ def main():
     console.print(note_panel)
     console.print("\n")
 
-    # Ask user about the type of operation
-
+    # Ask user about type of operation
     operation = questionary.select(
         "What would you like to do?",
         choices=["Merge PDFs",
@@ -55,9 +53,6 @@ def main():
         return
 
     elif (operation == "Merge PDFs"):
-    
-        # TO DO: Open pop up to make user upload PDFs with drag-and-drop
-        # Inside pop-up, make user upload files and make sure there are at least two. When done, go ahead.
 
         app = QApplication(sys.argv)
 
@@ -66,12 +61,20 @@ def main():
 
         app.exec()
 
+        # Retrieve selected files from the GUI
+        selected_files = window.selected_files
 
-        console.print(f"\n[yellow]Merging {len(input)} files...[/yellow]")
+        if not selected_files:
+            console.print("[bold red]No files selected. Operation cancelled.[/bold red]\n")
+            return
 
+        console.print(f"\n[yellow]Merging {len(selected_files)} files...[/yellow]")
+
+        # TODO: Define output file path (e.g., ask user or use a default)
+        output = "merged_output.pdf"  # Placeholder - replace with user input logic
 
         try:
-            merge_files(input, output)
+            merge_files(selected_files, output)
             console.print("[bold green]Merged successfully![/bold green]\n")
         except FileNotFoundError:
             console.print("[bold red]Error: One of the files you typed does not exist.[/bold red]\n")
