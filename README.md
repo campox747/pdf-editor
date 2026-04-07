@@ -1,6 +1,6 @@
 # PDF Toolkit: Merge & Reorder Utility
 
-pdf-editor allows you to merge PDFs and reorder the pages as you wish.
+pdf-editor allows you to merge PDFs and reorder the pages as you wish through a simple and interactive program run directly form your terminal.
 
 ## Overview
 A lightweight, local utility designed to handle common PDF tasks without the need for expensive software or internet connection. This tool allows users to easily upload multiple PDF files to append them together (merge) or change the exact sequence of pages within a single PDF document (reorder).
