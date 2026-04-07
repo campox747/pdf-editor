@@ -1,7 +1,6 @@
 import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
-    QApplication,
     QListWidget,
     QAbstractItemView,
     QLabel,
@@ -12,6 +11,7 @@ from PyQt6.QtWidgets import (
     QFileDialog,
     QMessageBox
 )
+from pathlib import Path
 
 # Subclass QMainWindow to customize your application's main window
 class MainWindow(QMainWindow):
@@ -41,8 +41,8 @@ class MainWindow(QMainWindow):
         merge_button.clicked.connect(self.confirm_and_close)
 
         ### TO DO: Create Output field to choose the file name and destination folder
-        ###
-        ###
+        output_button = QPushButton("Choose destination folder") 
+        output_button.clicked.connect(self.store_output)
 
         # Create layout to hold all items
         layout = QVBoxLayout()
@@ -53,8 +53,7 @@ class MainWindow(QMainWindow):
 
         layout.addWidget(self.files_list)
         layout.addWidget(files_button, alignment=Qt.AlignmentFlag.AlignLeft)
-        ### TO DO: 
-        ### Add to layout and connect to store_output function
+        layout.addWidget(output_button, alignment=Qt.AlignmentFlag.AlignLeft)
 
         layout.addWidget(merge_button, alignment=Qt.AlignmentFlag.AlignRight)
         layout.addStretch()
@@ -91,13 +90,14 @@ class MainWindow(QMainWindow):
         else:
             print("No files uploaded")
 
-    ## TO DO:
-    ## Store output in correct destination folder and name
-    def store_output(self):
-        print("To be implemented yet")
-        # Get output file name stored
 
-        # Get destination folder
+    def store_output(self):
+        self.dir_path = QFileDialog.getExistingDirectory(self, "Select a directory")
+
+        if self.dir_path:
+            self.dir_path = Path(self.dir_path)
+
+        # Get output file name stored
 
 
     # Confirm selection and close window if valid
@@ -109,8 +109,6 @@ class MainWindow(QMainWindow):
         if len(self.selected_files) < 2:
             QMessageBox.warning(self, "Insufficient Files", "Please select at least 2 PDF files to merge.")
             return
-        
-        # pass name of output and destination folder
 
         # Close the window
         self.close()

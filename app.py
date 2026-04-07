@@ -5,7 +5,7 @@ from rich.panel import Panel
 from rich.console import Console
 from core.merge import merge_files
 from rich.align import Align
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton
+from PyQt6.QtWidgets import QApplication
 from core.gui_merge import MainWindow
 
 # Initialize Console
@@ -70,11 +70,16 @@ def main():
 
         console.print(f"\n[yellow]Merging {len(selected_files)} files...[/yellow]")
 
-        # TODO: Define output file path (e.g., ask user or use a default)
-        output = "merged_output.pdf"  # Placeholder - replace with user input logic
+        output_name = "merged_output.pdf" 
+        output_path = None
+        default = True
+
+        if getattr(window, "dir_pathpath", None):
+            output_path = window.dir_pathpath / output_name
+            default = False
 
         try:
-            merge_files(selected_files, output)
+            merge_files(selected_files, output_name, output_path, default)
             console.print("[bold green]Merged successfully![/bold green]\n")
         except FileNotFoundError:
             console.print("[bold red]Error: One of the files you typed does not exist.[/bold red]\n")
