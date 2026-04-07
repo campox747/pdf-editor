@@ -74,8 +74,8 @@ def main():
         output_path = None
         default = True
 
-        if getattr(window, "dir_pathpath", None):
-            output_path = window.dir_pathpath / output_name
+        if getattr(window, "dir_path", None):
+            output_path = window.dir_path / output_name
             default = False
 
         try:

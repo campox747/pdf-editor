@@ -9,7 +9,7 @@ def merge_files(args, output_name, output_path, default):
     for pdf in args:
         merger.append(pdf)
     
-    default_path = Path.home() / "Downloads" / "output.pdf"
+    default_path = Path.home() / "Downloads" / output_name
 
     if default:
         merger.write(default_path)
