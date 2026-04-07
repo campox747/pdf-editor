@@ -77,6 +77,8 @@ def main():
         if getattr(window, "dir_path", None):
             output_path = window.dir_path / output_name
             default = False
+ 
+        print(f"File stored in {window.dir_path}")
 
         try:
             merge_files(selected_files, output_name, output_path, default)

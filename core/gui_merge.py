@@ -97,7 +97,8 @@ class MainWindow(QMainWindow):
         if self.dir_path:
             self.dir_path = Path(self.dir_path)
 
-        # Get output file name stored
+        # TO DO:
+        #  Get output file name stored
 
 
     # Confirm selection and close window if valid
