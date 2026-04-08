@@ -24,7 +24,7 @@ class MainWindow(QMainWindow):
         # Create the label (title)
         label = QLabel("Please select the files you want to merge in order:")
         font = label.font()
-        font.setPointSize(15)
+        font.setPointSize(18)
         label.setFont(font)
         label.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
@@ -48,6 +48,7 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout()
         layout.setContentsMargins(30, 15, 30, 15)
 
+        layout.addSpacing(20)
         layout.addWidget(label)
         layout.addSpacing(30)
 

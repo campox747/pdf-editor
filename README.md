@@ -9,17 +9,18 @@ A lightweight, local utility designed to handle common PDF tasks without the nee
 * **Merge PDFs:** Upload two or more PDF files and stitch them together in your desired order into a single, continuous document.
 * **Reorder Pages:** Upload a single PDF, view its total page count, and specify a new custom order for the pages (e.g., move page 5 to the front).
 * **Local Processing:** Powered by Python, ensuring that document manipulation happens securely and efficiently.
-* **User Interface** A clean and minimal terminal UI built with the PyQt6 and rich libraries.
+* **User Interface:** A clean and minimal terminal UI built with PyQt6 and rich.
 
 ## Tech Stack
-* **Language:** Python 3.13.1.
-* **Core Logic / PDF Manipulation:** [`pypdf`](https://pypi.org/project/pypdf/) - A pure-Python library built for splitting, merging, cropping, and transforming PDF pages.
-* **Frontend UI:** [`PyQt6`](https://www.riverbankcomputing.com/static/Docs/PyQt6/)- A Python library for intuitive and simple UI creation.
+* **Language:** Python 3.13.1
+* **Core Logic / PDF Manipulation:** [`pypdf`](https://pypi.org/project/pypdf/) — a pure-Python library for splitting, merging, cropping, and transforming PDF pages.
+* **Frontend UI:** [`PyQt6`](https://www.riverbankcomputing.com/static/Docs/PyQt6/) — used for building an intuitive desktop interface.
+* **Terminal Styling:** [`rich`](https://rich.readthedocs.io/en/latest/index.html) — for colorful, readable terminal output.
 
 ## Architecture & Logic
-This project is separated into backend logic and frontend UI:
-1. **The Merge Engine:** Creates a blank `PdfWriter` object in memory, iterates through the uploaded `PdfReader` objects, and appends the pages sequentially before exporting.
-2. **The Reorder Engine:** Reads a single uploaded PDF, accepts an array of new page indices from the user, fetches those specific pages in the new order, and writes them to a new file.
+This project separates backend processing from the frontend interface:
+1. **Merge Engine:** Initializes a `PdfWriter`, iterates over the uploaded PDF files, and appends their pages in order before exporting. The merged document is saved to the user-provided path and filename, or to the default Downloads folder if no custom output is selected.
+2. **Reorder Engine:** Reads a single uploaded PDF, accepts a new page order from the user, selects pages in that order, and writes the reordered document to a new file.
 
 ## Installation & Setup (Local Development)
 
