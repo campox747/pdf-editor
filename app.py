@@ -28,7 +28,7 @@ def main():
 
     # Print Info Note
     note_panel = Panel(
-    "Use [bold white]Ctrl + C[/bold white] (on Windows & macOS) to abort.",
+    " Press [bold white]Enter [/bold white]to select. \n [bold white]Use Ctrl + C [/bold white](on Windows & macOS) to abort.",
     title="[bold yellow]💡 Note[/bold yellow]",
     border_style="yellow",
     style="yellow",
@@ -42,7 +42,6 @@ def main():
         "What would you like to do?",
         choices=["Merge PDFs",
                  "Reorder PDF",
-                 "Help",
                  "Exit"
         ]).ask()
     
@@ -88,3 +87,5 @@ def main():
                 console.print("[bold red]Error: One of the files you typed does not exist.[/bold red]\n")
             except Exception as e:
                 console.print(f"[bold red]An unexpected error occurred: {e}[/bold red]\n")
+
+
