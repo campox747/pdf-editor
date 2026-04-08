@@ -68,22 +68,23 @@ def main():
             console.print("[bold red]No files selected. Operation cancelled.[/bold red]\n")
             return
 
-        console.print(f"\n[yellow]Merging {len(selected_files)} files...[/yellow]")
+        if len(selected_files) >= 2:
+            console.print(f"\n[yellow]Merging {len(selected_files)} files...[/yellow]")
 
-        output_path = None
-        output_name = "merged_output.pdf"
+            output_path = None
+            output_name = "merged_output.pdf"
 
-        if getattr(window, "out_path", None):
-            output_path = window.out_path
-            output_name = window.out_path.name
-            console.print(f"Output will be saved to: {output_path}")
-        else:
-            console.print(f"Output will be saved to default Downloads path as: {output_name}")
+            if getattr(window, "out_path", None):
+                output_path = window.out_path
+                output_name = window.out_path.name
+                console.print(f"Output will be saved to: {output_path}")
+            else:
+                console.print(f"Output will be saved to default Downloads path as: {output_name}")
 
-        try:
-            merge_files(selected_files, output_name, output_path)
-            console.print("[bold green]Merged successfully![/bold green]\n")
-        except FileNotFoundError:
-            console.print("[bold red]Error: One of the files you typed does not exist.[/bold red]\n")
-        except Exception as e:
-            console.print(f"[bold red]An unexpected error occurred: {e}[/bold red]\n")
+            try:
+                merge_files(selected_files, output_name, output_path)
+                console.print("[bold green]Merged successfully![/bold green]\n")
+            except FileNotFoundError:
+                console.print("[bold red]Error: One of the files you typed does not exist.[/bold red]\n")
+            except Exception as e:
+                console.print(f"[bold red]An unexpected error occurred: {e}[/bold red]\n")

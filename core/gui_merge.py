@@ -66,6 +66,7 @@ class MainWindow(QMainWindow):
 
         # Initialize selected files list and output path
         self.selected_files = []
+        self.files = []
         self.out_path = None
 
     # Open file browser and make user select files to merge
@@ -84,12 +85,11 @@ class MainWindow(QMainWindow):
             for file in file_paths:
                 print(f"Files: {file}")
 
-            self.files_list.clear()
 
             # Display the chosen files to the list
             self.files_list.addItems(file_paths)
         
-        else:
+        elif (self.files_list.count() == 0):
             print("No files uploaded")
 
 
@@ -114,6 +114,8 @@ class MainWindow(QMainWindow):
         if len(self.selected_files) < 2:
             QMessageBox.warning(self, "Insufficient Files", "Please select at least 2 PDF files to merge.")
             return
+
+        self.files_list.clear()
 
         # Close the window
         self.close()
