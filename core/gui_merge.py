@@ -63,8 +63,9 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(container)
 
-        # Initialize selected files list
+        # Initialize selected files list and output path
         self.selected_files = []
+        self.out_path = None
 
     # Open file browser and make user select files to merge
     def open_file_browser(self):
@@ -92,13 +93,15 @@ class MainWindow(QMainWindow):
 
 
     def store_output(self):
-        self.dir_path = QFileDialog.getExistingDirectory(self, "Select a directory")
-
-        if self.dir_path:
-            self.dir_path = Path(self.dir_path)
-
-        # TO DO:
-        #  Get output file name stored
+        self.out_path, _ = QFileDialog.getSaveFileName(
+            self,
+            "Save merged PDF as",
+            "",
+            "PDF Files (*.pdf)"
+        )
+        
+        if self.out_path:
+            self.out_path = Path(self.out_path)
 
 
     # Confirm selection and close window if valid

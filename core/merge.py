@@ -3,16 +3,14 @@ from pathlib import Path
 
 
 # Merges two PDFs together  
-def merge_files(args, output_name, output_path, default):
+def merge_files(args, output_name, output_path=None):
     merger = PdfWriter()
 
     for pdf in args:
         merger.append(pdf)
     
-    default_path = Path.home() / "Downloads" / output_name
-
-    if default:
-        merger.write(default_path)
+    if output_path is None:
+        merger.write(Path.home() / "Downloads" / output_name)
     else:
         merger.write(output_path)
     print("Done!")
