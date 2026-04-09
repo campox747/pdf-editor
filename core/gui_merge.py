@@ -24,7 +24,7 @@ class MainWindow(QMainWindow):
         # Create the label (title)
         label = QLabel("Please select the files you want to merge in order:")
         font = label.font()
-        font.setPointSize(15)
+        font.setPointSize(18)
         label.setFont(font)
         label.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
@@ -48,6 +48,7 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout()
         layout.setContentsMargins(30, 15, 30, 15)
 
+        layout.addSpacing(20)
         layout.addWidget(label)
         layout.addSpacing(30)
 
@@ -63,8 +64,10 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(container)
 
-        # Initialize selected files list
+        # Initialize selected files list and output path
         self.selected_files = []
+        self.files = []
+        self.out_path = None
 
     # Open file browser and make user select files to merge
     def open_file_browser(self):
@@ -82,23 +85,24 @@ class MainWindow(QMainWindow):
             for file in file_paths:
                 print(f"Files: {file}")
 
-            self.files_list.clear()
 
             # Display the chosen files to the list
             self.files_list.addItems(file_paths)
         
-        else:
+        elif (self.files_list.count() == 0):
             print("No files uploaded")
 
 
     def store_output(self):
-        self.dir_path = QFileDialog.getExistingDirectory(self, "Select a directory")
-
-        if self.dir_path:
-            self.dir_path = Path(self.dir_path)
-
-        # TO DO:
-        #  Get output file name stored
+        self.out_path, _ = QFileDialog.getSaveFileName(
+            self,
+            "Save merged PDF as",
+            "",
+            "PDF Files (*.pdf)"
+        )
+        
+        if self.out_path:
+            self.out_path = Path(self.out_path)
 
 
     # Confirm selection and close window if valid
@@ -110,6 +114,8 @@ class MainWindow(QMainWindow):
         if len(self.selected_files) < 2:
             QMessageBox.warning(self, "Insufficient Files", "Please select at least 2 PDF files to merge.")
             return
+
+        self.files_list.clear()
 
         # Close the window
         self.close()
