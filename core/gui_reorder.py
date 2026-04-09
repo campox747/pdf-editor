@@ -14,15 +14,15 @@ from PyQt6.QtWidgets import (
 from pathlib import Path
 
 # Subclass QMainWindow to customize your application's main window
-class MainWindow(QMainWindow):
+class ReorderWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("Merge Files")
+        self.setWindowTitle("Reorder Pages")
 
         # Create the label (title)
-        label = QLabel("Please select the files you want to merge in order:")
+        label = QLabel("Please select the file you want to edit")
         font = label.font()
         font.setPointSize(18)
         label.setFont(font)
@@ -37,8 +37,8 @@ class MainWindow(QMainWindow):
         files_button.clicked.connect(self.open_file_browser)
 
         # Create Merge button to confirm selection and close window
-        merge_button = QPushButton("Merge Selected Files")
-        merge_button.clicked.connect(self.confirm_and_close)
+        edit_button = QPushButton("Edit File")
+        edit_button.clicked.connect(self.confirm_and_close)
 
         ### TO DO: Create Output field to choose the file name and destination folder
         output_button = QPushButton("Choose destination folder") 
@@ -56,7 +56,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(files_button, alignment=Qt.AlignmentFlag.AlignLeft)
         layout.addWidget(output_button, alignment=Qt.AlignmentFlag.AlignLeft)
 
-        layout.addWidget(merge_button, alignment=Qt.AlignmentFlag.AlignRight)
+        layout.addWidget(edit_button, alignment=Qt.AlignmentFlag.AlignRight)
         layout.addStretch()
 
         container = QWidget()
@@ -71,32 +71,29 @@ class MainWindow(QMainWindow):
 
     # Open file browser and make user select files to merge
     def open_file_browser(self):
-        file_paths, _ = QFileDialog.getOpenFileNames(
+        file_path, _ = QFileDialog.getOpenFileName(
             self,
-            "Select PDFs to Merge",    
+            "Select file to edit",    
             "",                        
             "PDF Files (*.pdf)"        
         )
 
-        if file_paths:
-            print("Files Uploaded:")
+        if file_path:
+            print(f"File Uploaded: {file_path}")
 
-            # Print files in terminal for later cross-checking
-            for file in file_paths:
-                print(f"Files: {file}")
-
+            self.files_list.clear()
 
             # Display the chosen files to the list
-            self.files_list.addItems(file_paths)
+            self.files_list.addItem(file_path)
         
         elif (self.files_list.count() == 0):
             print("No files uploaded")
 
 
     def store_output(self):
-        self.out_path, _ = QFileDialog.getSaveFileNames(
+        self.out_path, _ = QFileDialog.getSaveFileName(
             self,
-            "Save merged PDF as",
+            "Save edited PDF as",
             "",
             "PDF Files (*.pdf)"
         )
@@ -109,10 +106,10 @@ class MainWindow(QMainWindow):
     def confirm_and_close(self):
 
         # Get current items from the list (in order)
-        self.selected_files = [self.files_list.item(i).text() for i in range(self.files_list.count())]
+        self.selected_files = [self.files_list.item(0).text()]
 
-        if len(self.selected_files) < 2:
-            QMessageBox.warning(self, "Insufficient Files", "Please select at least 2 PDF files to merge.")
+        if len(self.selected_files) == 0:
+            QMessageBox.warning(self, "Insufficient Files", "Please select at least 1 PDF files to edit.")
             return
 
         self.files_list.clear()
