@@ -15,12 +15,11 @@ console = Console()
 def main():
 
     # Print title
-
     title_panel = Panel(
-    "[bold cyan]Welcome to PDF Toolkit![/bold cyan]",
-    border_style="cyan",
-    padding=(1, 5),  # Adds 1 line of vertical padding, 5 spaces of horizontal padding
-    expand=False
+        "[bold cyan]Welcome to PDF Toolkit![/bold cyan]",
+        border_style="cyan",
+        padding=(1, 5),  # Adds 1 line of vertical padding, 5 spaces of horizontal padding
+        expand=False
     )
 
     console.print("\n")
@@ -29,11 +28,11 @@ def main():
 
     # Print Info Note
     note_panel = Panel(
-    "Use [bold white]Ctrl + C[/bold white] (on Windows & macOS) to abort.",
-    title="[bold yellow]💡 Note[/bold yellow]",
-    border_style="yellow",
-    style="yellow",
-    expand=False
+        "Press [bold white]Enter [/bold white]to select. \n [bold white]Use Ctrl + C [/bold white](on Windows & macOS) to abort.",
+        title="[bold yellow]💡 Note[/bold yellow]",
+        border_style="yellow",
+        style="yellow",
+        expand=False
     )
     console.print(note_panel)
     console.print("\n")
@@ -43,7 +42,6 @@ def main():
         "What would you like to do?",
         choices=["Merge PDFs",
                  "Reorder PDF",
-                 "Help",
                  "Exit"
         ]).ask()
     
