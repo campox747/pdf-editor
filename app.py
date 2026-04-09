@@ -29,7 +29,7 @@ def main():
 
     # Print Info Note
     note_panel = Panel(
-    " Press [bold white]Enter [/bold white]to select. \n [bold white]Use Ctrl + C [/bold white](on Windows & macOS) to abort.",
+    "Use [bold white]Ctrl + C[/bold white] (on Windows & macOS) to abort.",
     title="[bold yellow]💡 Note[/bold yellow]",
     border_style="yellow",
     style="yellow",
@@ -43,6 +43,7 @@ def main():
         "What would you like to do?",
         choices=["Merge PDFs",
                  "Reorder PDF",
+                 "Help",
                  "Exit"
         ]).ask()
     
@@ -68,8 +69,7 @@ def main():
             console.print("[bold red]No files selected. Operation cancelled.[/bold red]\n")
             return
 
-        if len(selected_files) >= 2:
-            console.print(f"\n[yellow]Merging {len(selected_files)} files...[/yellow]")
+        console.print(f"\n[yellow]Merging {len(selected_files)} files...[/yellow]")
 
         output_name = "merged_output.pdf" 
         output_path = None
@@ -84,6 +84,51 @@ def main():
         try:
             merge_files(selected_files, output_name, output_path, default)
             console.print("[bold green]Merged successfully![/bold green]\n")
+        except FileNotFoundError:
+            console.print("[bold red]Error: One of the files you typed does not exist.[/bold red]\n")
+        except Exception as e:
+            console.print(f"[bold red]An unexpected error occurred: {e}[/bold red]\n")
+
+    elif (operation == "Reorder PDF"):
+
+        app = QApplication(sys.argv)
+
+        window = MainWindow()
+        window.show()
+
+        app.exec()
+
+        # Retrieve selected files from the GUI
+        selected_files = window.selected_files
+
+        # Check if they selected nothing
+        if not selected_files:
+            console.print("[bold red]No files selected. Operation cancelled.[/bold red]\n")
+            return
+
+        # Check if they selected too many files
+        if len(selected_files) > 1:
+            console.print("[bold red]Error: Please select only ONE file to reorder.[/bold red]\n")
+            return
+
+        # Extract the single target file
+        target_file = selected_files[0]
+
+        console.print(f"\n[yellow]Preparing to reorder: {target_file}[/yellow]")
+
+        output_name = "reordered_output.pdf" 
+        output_path = None
+        default = True
+
+        if getattr(window, "dir_path", None):
+            output_path = window.dir_path / output_name
+            default = False
+ 
+        print(f"File stored in {window.dir_path}")
+
+        try:
+            reorder_pages(selected_files, output_name, output_path, default)
+            console.print("[bold green]Reordered successfully![/bold green]\n")
         except FileNotFoundError:
             console.print("[bold red]Error: One of the files you typed does not exist.[/bold red]\n")
         except Exception as e:
