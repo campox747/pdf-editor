@@ -104,15 +104,13 @@ class ReorderWindow(QMainWindow):
 
     # Confirm selection and close window if valid
     def confirm_and_close(self):
-
-        # Get current items from the list (in order)
-        self.selected_files = [self.files_list.item(0).text()]
-
-        if len(self.selected_files) == 0:
-            QMessageBox.warning(self, "Insufficient Files", "Please select at least 1 PDF files to edit.")
+        # Check first!
+        if self.files_list.count() == 0:
+            QMessageBox.warning(self, "Insufficient Files", "Please select a PDF file to edit.")
             return
 
+        # Safe to extract now
+        self.selected_files = [self.files_list.item(0).text()]
+        
         self.files_list.clear()
-
-        # Close the window
         self.close()

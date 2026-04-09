@@ -31,8 +31,8 @@ def validate_sequence(raw_input, max_pages):
     except:
         return False
 
-def reorder_pages(file_path, output_name, output_path, default):
-    reader = PdfReader(file_path)
+def reorder_pages(target_file, output_name, output_path):
+    reader = PdfReader(target_file)
     writer = PdfWriter()
     total = len(reader.pages)
     
@@ -46,7 +46,7 @@ def reorder_pages(file_path, output_name, output_path, default):
     for page_num in clean_sequence:
         writer.add_page(reader.pages[page_num])
     
-    if default:
+    if output_path is None:
         writer.write(Path.home() / "Downloads" / output_name)
     else:
         writer.write(output_path)

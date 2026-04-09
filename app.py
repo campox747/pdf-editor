@@ -124,7 +124,7 @@ def main():
             console.print(f"Output will be saved to default Downloads path as: {output_name}")
 
         try:
-            reorder_pages(selected_files, output_name, output_path)
+            reorder_pages(target_file, output_name, output_path)
             console.print("[bold green]Reordered successfully![/bold green]\n")
         except FileNotFoundError:
             console.print("[bold red]Error: One of the files you typed does not exist.[/bold red]\n")
