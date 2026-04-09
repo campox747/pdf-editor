@@ -94,7 +94,7 @@ class MainWindow(QMainWindow):
 
 
     def store_output(self):
-        self.out_path, _ = QFileDialog.getSaveFileNames(
+        self.out_path, _ = QFileDialog.getSaveFileName(
             self,
             "Save merged PDF as",
             "",
