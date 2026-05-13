@@ -45,4 +45,3 @@ pip install -e .
  pdf-toolkit
 ```
 
-To be continued and tested...
