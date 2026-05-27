@@ -26,7 +26,7 @@ This project separates backend processing from the frontend interface:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/vfi27/pdf-editor.git](https://github.com/vfi27/pdf-editor.git)
+   git clone [https://github.com/campox747/pdf-editor.git](https://github.com/campox747/pdf-editor.git)
    cd pdf-editor
 
 2. **Create a virtual environment (recommended):**
